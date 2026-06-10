@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  select option {
+    background-color: #1e293b;
+    color: #f1f5f9;
+  }
+}
+
+@layer utilities {
+  .animate-in {
+    animation: animateIn 0.4s ease-out both;
+  }
+  .fade-in {
+    --tw-enter-opacity: 0;
+  }
+  .slide-in-from-bottom-4 {
+    --tw-enter-translate-y: 1rem;
+  }
+  @keyframes animateIn {
+    from {
+      opacity: var(--tw-enter-opacity, 1);
+      transform: translateY(var(--tw-enter-translate-y, 0));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
