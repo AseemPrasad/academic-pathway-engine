@@ -2,6 +2,34 @@
 
 An AI-assisted platform that recommends the optimal academic advancement pathway (Certification, DBA, PhD, Honorary Doctorate) based on a professional's qualifications, experience, and career goals.
 
+### System Architecture Overview
+
+The **Academic Pathway Recommendation Engine** follows a modern, decoupled monolithic structure built on a Serverless-first methodology using Next.js. The system’s architecture can be broken down into three main operational layers: the presentation layer, the calculation/data layer, and the AI reasoning layer.
+
+```
++-----------------------------------------------------------------+
+|                        Next.js Frontend                         |
+|  (App Router Client Components: UserForm, SubmissionTable)     |
++--------------------------------+--------------------------------+
+                                 |
+                        HTTPS POST / GET
+                                 |
++--------------------------------v--------------------------------+
+|                   Next.js Route Handlers                        |
+|   (/api/recommend, /api/submissions, /api/analytics)           |
++--------+-----------------------+-----------------------+--------+
+         |                       |                       |
+   Pure TS Functions      Supabase JS Client       Fetch API Call
+         |                       |                       |
++--------v--------+   +----------v----------+   +--------v--------+
+| Scoring Engine  |   |  Supabase Postgres  |   | AI LLM Gateway  |
+| Normalization & |   |  (Persistence via   |   | Groq (Llama 3)  |
+| Categorization  |   |   RLS Policies)     |   |   Fallback:     |
++-----------------+   +---------------------+   | OpenRouter      |
+                                                | (Mistral 7B)    |
+                                                +-----------------+
+
+
 ## Stack
 
 - **Next.js 15** (App Router, TypeScript)
